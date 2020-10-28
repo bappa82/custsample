@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<DBSchema>
+    <Entities>
+        <Entity TableName="YFS_ITEM">
+            <Attributes>
+                <Attribute ColumnName="EXTN_AATP_FLAG"  Description="AATP FLAG" Type="CHAR" Size="1" XMLName="ExtnAATPFlag" Nullable="true" XMLGroup="Extn"/>
+            </Attributes>	
+            <Indices> 
+                <Index Name="EXTN_ITEM_I1"> 
+                    <Column Name="EXTN_AATP_FLAG" />   
+                </Index> 
+            </Indices>
+        </Entity>
+        <Entity TableName="YFS_INVENTORY_AUDIT">
+            <Indices> 
+                <Index Name="EXTN_INVADT_1"> 
+                    <Column Name="REFERENCE_1"/>
+                    <Column Name="TRANSACTION_TYPE"/>
+                    <Column Name="MODIFYTS"/>
+                </Index>
+            </Indices>
+        </Entity>
+        <Entity ApiNeeded="Y" AuditRequired="N" Description="Item Node Eligible" HasHistory="N" Prefix="EXTN" TableName="EXTN_ITEM_ELIGIBLE" KeyType="Random" XMLName="ExtnItemEligible">
+        <Attributes>
+            <Attribute XMLName="ItemEligibleKey" ColumnName="ITEM_ELIGIBLE_KEY" DataType="Key" Nullable="false"/>
+            <Attribute XMLName="OrganizationCode" ColumnName="ORGANIZATION_CODE" DataType="OrganizationCode" Nullable="true"/>
+            <Attribute XMLName="ItemID" ColumnName="ITEM_ID" DataType="ItemID" Nullable="true"/>
+            <Attribute XMLName="UnitOfMeasure" ColumnName="UOM" DataType="UOM" Nullable="true"/>
+            <Attribute XMLName="Node" ColumnName="NODE" DataType="ShipNode" Nullable="true"/>
+            <Attribute XMLName="IsItemEligible" ColumnName="IS_ITEM_ELIGIBLE" DataType="Flag" Nullable="true"/>
+            <Attribute ColumnName="CREATETS" DataType="TimeStamp" DefaultValue="sysdate"/>
+            <Attribute ColumnName="MODIFYTS" DataType="TimeStamp" DefaultValue="sysdate"/>
+            <Attribute ColumnName="CREATEUSERID" DataType="UserId" DefaultValue="' '"/>
+            <Attribute ColumnName="MODIFYUSERID" DataType="UserId" DefaultValue="' '"/>
+            <Attribute ColumnName="CREATEPROGID" DataType="ProgramID" DefaultValue="' '"/>
+            <Attribute ColumnName="MODIFYPROGID" DataType="ProgramID" DefaultValue="' '"/>
+            <Attribute ColumnName="LOCKID" DataType="Lockid" DefaultValue="0"/>
+        </Attributes>
+        <PrimaryKey Name="ITEM_ELIGIBLE_PK">
+            <Attribute ColumnName="ITEM_ELIGIBLE_KEY"/>
+        </PrimaryKey>
+        <Indices>
+            <Index Name="EXTN_ITMELG_I1" Unique="true">
+                <Column Name="ORGANIZATION_CODE"/>
+                <Column Name="ITEM_ID"/>
+                <Column Name="UOM"/>
+                <Column Name="NODE"/>
+            </Index>
+            <Index Name="EXTN_ITMELG_I2" Unique="false">
+                <Column Name="ITEM_ID"/>
+                <Column Name="NODE"/>
+                <Column Name="IS_ITEM_ELIGIBLE"/>
+            </Index>
+        </Indices>
+        </Entity>
+    </Entities>
+</DBSchema>
+ 
